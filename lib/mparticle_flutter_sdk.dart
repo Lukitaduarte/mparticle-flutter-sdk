@@ -182,11 +182,12 @@ class MparticleFlutterSdk {
   }
 
   Future<User?> getCurrentUser() async {
-    String mpid = await _channel.invokeMethod('getMPID');
-    if (mpid == "") {
-      return null;
+    String? mpid = await _channel.invokeMethod('getMPID');
+    if (mpid != null && test.isNotEmpty) {
+      return new User(mpid);
     }
-    return new User(mpid);
+  
+    return null;
   }
 
   Future<Map> getAttributions() async {
